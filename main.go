@@ -26,17 +26,13 @@ func run() {
 	vecty.AddStylesheet(dataurl.New([]byte(views.Styles), "text/css").String())
 	app := &stores.App{}
 	app.Init()
-	//vecty.RenderBody(routes.NewRouter(app))
 	p := views.NewPage(app)
 
 	r := routes.New()
 	r.ForceHashURL = false
 	//r.ShouldInterceptLinks=true
 
-	//// Use HandleFunc to add routes.
-	r.HandleFunc("/greet/{name}", func(context *routes.Context) {
-		// The handler for this route simply grabs the name parameter
-		// from the map of params and says hello.
+	r.HandleFunc("/{name}", func(context *routes.Context) {
 		fmt.Printf("Hello, %s\n", context.Params["name"])
 		vecty.RenderBody(p)
 	})
