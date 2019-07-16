@@ -1,16 +1,18 @@
 package views
 
 import (
-	"fmt"
 	"github.com/dave/splitter"
 	"github.com/gopherjs/gopherjs/js"
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
 	"github.com/gopherjs/vecty/prop"
+	"github.com/pubgo/errors"
 	"github.com/pubgo/vapper/vapper"
 	"github.com/pubgo/vfrontend/actions"
 	"github.com/pubgo/vfrontend/compontents"
 	"github.com/pubgo/vfrontend/stores"
+	"github.com/siongui/godom"
+	"time"
 )
 
 type Page struct {
@@ -28,7 +30,6 @@ func NewPage() *Page {
 }
 
 func (t *Page) Handle(ctx *vapper.Context) {
-	fmt.Println(ctx)
 	vecty.RenderBody(t)
 }
 
@@ -43,11 +44,15 @@ func (t *Page) Mount() {
 		vecty.Rerender(t)
 	})
 
-	t.split = splitter.New("split")
-	t.split.Init(
-		js.S{"#left", "#right"},
-		js.M{"sizes": []float64{50, 50}},
-	)
+	go errors.RetryAt(time.Second, func(_ time.Duration) {
+		errors.T(godom.Document.Get("readyState").String() != "complete", "dom not ready")
+
+		t.split = splitter.New("split")
+		t.split.Init(
+			js.S{"#left", "#right"},
+			js.M{"sizes": []float64{50, 50}},
+		)
+	})
 }
 
 func (t *Page) Unmount() {
@@ -55,7 +60,6 @@ func (t *Page) Unmount() {
 }
 
 func (t *Page) Render() vecty.ComponentOrHTML {
-
 	return elem.Body(
 		elem.Div(
 			vecty.Markup(

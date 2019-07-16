@@ -12,6 +12,7 @@ require (
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c
 	github.com/gopherjs/vecty v0.0.0-20190701174234-2b6fc20f8913
 	github.com/gopherjs/websocket v0.0.0-20170522004412-87ee47603f13
+	github.com/pubgo/errors v0.3.0
 	github.com/pubgo/vapper v0.0.15
 	github.com/siongui/godom v0.0.0-20181006133514-8ba1cdb25192
 	github.com/tulir/gopher-ace v0.0.0-20170210071804-4ca2d59510bd

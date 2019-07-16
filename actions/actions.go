@@ -5,8 +5,6 @@ import (
 	"github.com/dave/services"
 )
 
-type Load struct{}
-
 type UserChangedTextAction struct {
 	Text string
 }
