@@ -1,6 +1,7 @@
 package views
 
 import (
+	"fmt"
 	"github.com/dave/splitter"
 	"github.com/gopherjs/gopherjs/js"
 	"github.com/gopherjs/vecty"
@@ -15,18 +16,19 @@ import (
 type Page struct {
 	vecty.Core
 
-	split  *splitter.Split
+	split *splitter.Split
+
 	app    *vapper.Vapper
 	editor *stores.EditorStore
 }
 
 func NewPage() *Page {
-	v := &Page{
-	}
+	v := &Page{}
 	return v
 }
 
 func (t *Page) Handle(ctx *vapper.Context) {
+	fmt.Println(ctx)
 	vecty.RenderBody(t)
 }
 

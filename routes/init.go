@@ -6,7 +6,8 @@ import (
 )
 
 func init() {
-	vapper.Route("/", views.NewPage())
-	vapper.Route("/app", views.NewPage())
-	vapper.Route("/app/{id}", views.NewPage())
+	app := vapper.Default()
+	app.Route("/", views.NewPage())
+	app.Route("/app", views.NewPage())
+	app.Route("/app/{id}", views.NewPage())
 }

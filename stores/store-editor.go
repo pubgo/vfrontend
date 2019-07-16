@@ -61,7 +61,8 @@ func init() {
 		html: strings.TrimSpace(defaultText),
 	}
 	s.transcode()
-	vapper.Store(s)
+	app := vapper.Default()
+	app.Store(s)
 }
 
 type EditorStore struct {
@@ -71,6 +72,7 @@ type EditorStore struct {
 
 func (s *EditorStore) Init(app *vapper.Vapper) {
 	s.app = app
+	fmt.Println("EditorStore","app",app)
 }
 
 func (s *EditorStore) Html() string {

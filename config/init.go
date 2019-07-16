@@ -7,7 +7,8 @@ type Config struct {
 }
 
 func init() {
-	vapper.Config(&Config{
+	app := vapper.Default()
+	app.Config(&Config{
 		UrlPrefix: "hello",
 	})
 }
