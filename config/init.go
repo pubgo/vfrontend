@@ -1,10 +1,13 @@
 package config
 
+import "github.com/pubgo/vapper/vapper"
+
 type Config struct {
 	UrlPrefix string
 }
 
-func InitCfg() {
-	//vapper.InitCfg(&Config{
-	// })
+func init() {
+	vapper.Config(&Config{
+		UrlPrefix: "hello",
+	})
 }

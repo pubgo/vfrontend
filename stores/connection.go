@@ -2,6 +2,7 @@ package stores
 
 import (
 	"errors"
+	"github.com/pubgo/vapper/vapper"
 	"github.com/pubgo/vfrontend/actions"
 	dom "github.com/siongui/godom"
 
@@ -17,17 +18,20 @@ import (
 )
 
 type ConnectionStore struct {
-	app *App
-
 	open bool
 	ws   *websocketjs.WebSocket
+
+	app *vapper.Vapper
 }
 
-func NewConnectionStore(app *App) *ConnectionStore {
+func NewConnectionStore() *ConnectionStore {
 	s := &ConnectionStore{
-		app: app,
 	}
 	return s
+}
+
+func (s *ConnectionStore) Init(app *vapper.Vapper) {
+	s.app = app
 }
 
 func (s *ConnectionStore) Open() bool {

@@ -1,7 +1,6 @@
-package views
+package compontents
 
 import (
-	"github.com/pubgo/vfrontend/stores"
 	"time"
 
 	"github.com/gopherjs/gopherjs/js"
@@ -13,7 +12,6 @@ import (
 
 type Editor struct {
 	vecty.Core
-	app *stores.App
 
 	Text string `vecty:"prop"`
 
@@ -23,9 +21,8 @@ type Editor struct {
 	readonly bool
 }
 
-func NewEditor(app *stores.App, id, lang, text string, readonly bool, change func(string)) *Editor {
+func NewEditor( id, lang, text string, readonly bool, change func(string)) *Editor {
 	v := &Editor{
-		app:      app,
 		lang:     lang,
 		id:       id,
 		change:   change,

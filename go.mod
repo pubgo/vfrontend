@@ -12,11 +12,11 @@ require (
 	github.com/gopherjs/gopherjs v0.0.0-20190430165422-3e4dfb77656c
 	github.com/gopherjs/vecty v0.0.0-20190701174234-2b6fc20f8913
 	github.com/gopherjs/websocket v0.0.0-20170522004412-87ee47603f13
-	github.com/gorilla/css v1.0.0 // indirect
+	github.com/pubgo/vapper v0.0.5
 	github.com/siongui/godom v0.0.0-20181006133514-8ba1cdb25192
 	github.com/tulir/gopher-ace v0.0.0-20170210071804-4ca2d59510bd
-	github.com/vincent-petithory/dataurl v0.0.0-20160330182126-9a301d65acbb
+	github.com/vincent-petithory/dataurl v0.0.0-20160330182126-9a301d65acbb // indirect
 	golang.org/x/tools v0.0.0-20190710184609-286818132824
-	honnef.co/go/js/dom v0.0.0-20190526011328-ebc4cf92d81f
+	honnef.co/go/js/dom v0.0.0-20190526011328-ebc4cf92d81f // indirect
 	marwan.io/vecty-router v0.0.0-20190701140924-0b5c86ca8801
 )

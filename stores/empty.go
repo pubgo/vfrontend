@@ -2,17 +2,21 @@ package stores
 
 import (
 	"github.com/dave/flux"
+	"github.com/pubgo/vapper/vapper"
 )
 
-func NewEmptyStore(app *App) *EmptyStore {
+func NewEmptyStore() *EmptyStore {
 	s := &EmptyStore{
-		app: app,
 	}
 	return s
 }
 
 type EmptyStore struct {
-	app *App
+	app *vapper.Vapper
+}
+
+func (s *EmptyStore) Init(app *vapper.Vapper) {
+	s.app = app
 }
 
 func (s *EmptyStore) Handle(payload *flux.Payload) bool {

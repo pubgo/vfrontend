@@ -1,44 +1,39 @@
 package views
 
 import (
-	"fmt"
 	"github.com/dave/splitter"
 	"github.com/gopherjs/gopherjs/js"
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
 	"github.com/gopherjs/vecty/prop"
+	"github.com/pubgo/vapper/vapper"
 	"github.com/pubgo/vfrontend/actions"
+	"github.com/pubgo/vfrontend/compontents"
 	"github.com/pubgo/vfrontend/stores"
-	"honnef.co/go/js/dom"
-	router "marwan.io/vecty-router"
 )
 
 type Page struct {
 	vecty.Core
-	app *stores.App
 
-	split *splitter.Split
+	split  *splitter.Split
+	app    *vapper.Vapper
+	editor *stores.EditorStore
 }
 
-func NewPage(app *stores.App) *Page {
+func NewPage() *Page {
 	v := &Page{
-		app: app,
 	}
 	return v
 }
 
-func (t *Page) Route() *router.Route {
-	return router.NewRoute("/a", t, router.NewRouteOpts{ExactMatch: true})
+func (t *Page) Handle(ctx *vapper.Context) {
+	vecty.RenderBody(t)
 }
 
-func (t *Page) Stores(eds *stores.EditorStore) {
-
+func (t *Page) Init(app *vapper.Vapper, editor *stores.EditorStore) {
+	t.app = app
+	t.editor = editor
 }
-
-func (t *Page) Config(eds *stores.EditorStore) {
-
-}
-
 
 func (t *Page) Mount() {
 	t.app.Watch(t, func(done chan struct{}) {
@@ -58,8 +53,6 @@ func (t *Page) Unmount() {
 }
 
 func (t *Page) Render() vecty.ComponentOrHTML {
-	fmt.Println(router.GetNamedVar(t), "hello")
-	fmt.Println(dom.GetWindow().Document().DocumentURI(), "hello")
 
 	return elem.Body(
 		elem.Div(
@@ -78,7 +71,7 @@ func (t *Page) renderLeft() *vecty.HTML {
 			prop.ID("left"),
 			vecty.Class("split"),
 		),
-		NewEditor(t.app, "html-editor", "html", t.app.Editor.Html(), true, func(value string) {
+		compontents.NewEditor("html-editor", "html", t.editor.Html(), true, func(value string) {
 			t.app.Dispatch(&actions.UserChangedTextAction{
 				Text: value,
 			})
@@ -92,6 +85,6 @@ func (t *Page) renderRight() *vecty.HTML {
 			prop.ID("right"),
 			vecty.Class("split"),
 		),
-		NewEditor(t.app, "code-editor", "golang", t.app.Editor.Code(), false, nil),
+		compontents.NewEditor("code-editor", "golang", t.editor.Code(), false, nil),
 	)
 }

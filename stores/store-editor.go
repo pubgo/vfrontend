@@ -3,6 +3,7 @@ package stores
 import (
 	"errors"
 	"fmt"
+	"github.com/pubgo/vapper/vapper"
 	"github.com/pubgo/vfrontend/actions"
 
 	"bytes"
@@ -55,18 +56,21 @@ const defaultText = `
 </div>
 `
 
-func NewEditorStore(app *App) *EditorStore {
+func init() {
 	s := &EditorStore{
-		app:  app,
 		html: strings.TrimSpace(defaultText),
 	}
 	s.transcode()
-	return s
+	vapper.Store(s)
 }
 
 type EditorStore struct {
-	app        *App
+	app        *vapper.Vapper
 	html, code string
+}
+
+func (s *EditorStore) Init(app *vapper.Vapper) {
+	s.app = app
 }
 
 func (s *EditorStore) Html() string {
