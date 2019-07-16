@@ -31,6 +31,15 @@ func (t *Page) Route() *router.Route {
 	return router.NewRoute("/a", t, router.NewRouteOpts{ExactMatch: true})
 }
 
+func (t *Page) Stores(eds *stores.EditorStore) {
+
+}
+
+func (t *Page) Config(eds *stores.EditorStore) {
+
+}
+
+
 func (t *Page) Mount() {
 	t.app.Watch(t, func(done chan struct{}) {
 		defer close(done)
