@@ -23,6 +23,16 @@ func main() {
 }
 
 func run() {
+	/*
+	vapper serve
+	vapper build
+
+	app:=vapper.App()
+	app.router("/app",NewViews(app).Handle)
+	app.router()
+	app.Start()
+
+	*/
 	vecty.AddStylesheet(dataurl.New([]byte(views.Styles), "text/css").String())
 	app := &stores.App{}
 	app.Init()

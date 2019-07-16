@@ -1,0 +1,5 @@
+[app]
+port=8080
+name="vapper"
+debug=true
+env="dev"
