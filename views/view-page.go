@@ -1,26 +1,23 @@
 package views
 
 import (
+	"fmt"
 	"github.com/dave/splitter"
 	"github.com/gopherjs/gopherjs/js"
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
 	"github.com/gopherjs/vecty/prop"
-	"github.com/pubgo/errors"
 	"github.com/pubgo/vapper/vapper"
 	"github.com/pubgo/vfrontend/actions"
 	"github.com/pubgo/vfrontend/compontents"
 	"github.com/pubgo/vfrontend/stores"
-	"github.com/siongui/godom"
-	"time"
 )
 
 type Page struct {
-	vecty.Core
+	vapper.BaseView
 
 	split *splitter.Split
 
-	app    *vapper.Vapper
 	editor *stores.EditorStore
 }
 
@@ -34,29 +31,18 @@ func (t *Page) Handle(ctx *vapper.Context) {
 }
 
 func (t *Page) Init(app *vapper.Vapper, editor *stores.EditorStore) {
-	t.app = app
+	t.App = app
 	t.editor = editor
 }
 
-func (t *Page) Mount() {
-	t.app.Watch(t, func(done chan struct{}) {
-		defer close(done)
-		vecty.Rerender(t)
-	})
-
-	go errors.RetryAt(time.Second, func(_ time.Duration) {
-		errors.T(godom.Document.Get("readyState").String() != "complete", "dom not ready")
-
-		t.split = splitter.New("split")
-		t.split.Init(
-			js.S{"#left", "#right"},
-			js.M{"sizes": []float64{50, 50}},
-		)
-	})
-}
-
-func (t *Page) Unmount() {
-	t.app.Delete(t)
+// ReadyStateComplete call when ReadyState is Complete
+func (t *Page) ReadyStateComplete() {
+	fmt.Println("ReadyStateComplete")
+	t.split = splitter.New("split")
+	t.split.Init(
+		js.S{"#left", "#right"},
+		js.M{"sizes": []float64{50, 50}},
+	)
 }
 
 func (t *Page) Render() vecty.ComponentOrHTML {
@@ -78,7 +64,7 @@ func (t *Page) renderLeft() *vecty.HTML {
 			vecty.Class("split"),
 		),
 		compontents.NewEditor("html-editor", "html", t.editor.Html(), true, func(value string) {
-			t.app.Dispatch(&actions.UserChangedTextAction{
+			t.App.Dispatch(&actions.UserChangedTextAction{
 				Text: value,
 			})
 		}),
