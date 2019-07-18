@@ -10,4 +10,5 @@ func init() {
 	app.Route("/", views.NewPage())
 	app.Route("/app", views.NewPage())
 	app.Route("/app/{id}", views.NewPage())
+	app.NotFound(views.NewNotFound())
 }

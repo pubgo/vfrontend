@@ -1,5 +1,7 @@
 [app]
-port=8080
-name="vapper"
+port=3000
+name="db2rest"
 debug=true
 env="dev"
+server_url= '/server_url' #接口地址
+site_url= 'http://localhost:1113' #网站地址
