@@ -15,7 +15,6 @@ func main() {
 	app.Start()
 }
 
-
 var styles = `
 	html, body {
 		height: 100%;

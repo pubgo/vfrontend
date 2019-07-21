@@ -13,7 +13,6 @@ type ChangeTextAction struct {
 	Text string
 }
 
-
 type Send struct{ Message services.Message }
 type Dial struct {
 	Url     string
