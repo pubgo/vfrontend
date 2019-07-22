@@ -63,6 +63,7 @@ func init() {
 	s.transcode()
 	app := vapper.Default()
 	app.Store(s)
+	fmt.Println(defaultText)
 }
 
 type EditorStore struct {
@@ -72,7 +73,7 @@ type EditorStore struct {
 
 func (s *EditorStore) Init(app *vapper.Vapper) {
 	s.app = app
-	fmt.Println("EditorStore","app",app)
+	fmt.Println("EditorStore", "app", app)
 }
 
 func (s *EditorStore) Html() string {
