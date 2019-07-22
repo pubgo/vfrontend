@@ -63,7 +63,6 @@ func init() {
 	s.transcode()
 	app := vapper.Default()
 	app.Store(s)
-	fmt.Println(defaultText)
 }
 
 type EditorStore struct {
