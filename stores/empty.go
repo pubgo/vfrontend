@@ -2,7 +2,7 @@ package stores
 
 import (
 	"github.com/dave/flux"
-	"github.com/pubgo/vapper/vapper"
+	"github.com/pubgo/vapper/jsvapper"
 )
 
 func NewEmptyStore() *EmptyStore {
@@ -12,10 +12,10 @@ func NewEmptyStore() *EmptyStore {
 }
 
 type EmptyStore struct {
-	app *vapper.Vapper
+	app *jsvapper.Vapper
 }
 
-func (s *EmptyStore) Init(app *vapper.Vapper) {
+func (s *EmptyStore) Init(app *jsvapper.Vapper) {
 	s.app = app
 }
 

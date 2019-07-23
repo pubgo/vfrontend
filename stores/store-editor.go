@@ -3,7 +3,7 @@ package stores
 import (
 	"errors"
 	"fmt"
-	"github.com/pubgo/vapper/vapper"
+	"github.com/pubgo/vapper/jsvapper"
 	"github.com/pubgo/vfrontend/actions"
 
 	"bytes"
@@ -61,16 +61,16 @@ func init() {
 		html: strings.TrimSpace(defaultText),
 	}
 	s.transcode()
-	app := vapper.Default()
+	app := jsvapper.Default()
 	app.Store(s)
 }
 
 type EditorStore struct {
-	app        *vapper.Vapper
+	app        *jsvapper.Vapper
 	html, code string
 }
 
-func (s *EditorStore) Init(app *vapper.Vapper) {
+func (s *EditorStore) Init(app *jsvapper.Vapper) {
 	s.app = app
 	fmt.Println("EditorStore", "app", app)
 }

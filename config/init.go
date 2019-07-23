@@ -1,13 +1,13 @@
 package config
 
-import "github.com/pubgo/vapper/vapper"
+import "github.com/pubgo/vapper/jsvapper"
 
 type Config struct {
 	UrlPrefix string
 }
 
 func init() {
-	app := vapper.Default()
+	app := jsvapper.Default()
 	app.Config(&Config{
 		UrlPrefix: "hello",
 	})

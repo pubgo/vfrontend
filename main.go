@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gopherjs/vecty"
-	"github.com/pubgo/vapper/vapper"
+	"github.com/pubgo/vapper/jsvapper"
 	_ "github.com/pubgo/vfrontend/config"
 	_ "github.com/pubgo/vfrontend/routes"
 	"github.com/vincent-petithory/dataurl"
@@ -10,7 +10,7 @@ import (
 
 func main() {
 	vecty.AddStylesheet(dataurl.New([]byte(styles), "text/css").String())
-	app := vapper.Default()
+	app := jsvapper.Default()
 	app.ForceHashURL = false
 	app.Start()
 }

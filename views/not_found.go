@@ -4,7 +4,7 @@ import (
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
 	"github.com/gopherjs/vecty/prop"
-	"github.com/pubgo/vapper/vapper"
+	"github.com/pubgo/vapper/jsvapper"
 )
 
 func NewNotFound() *NotFound {
@@ -18,7 +18,7 @@ type NotFound struct {
 func (t *NotFound) ReadyStateComplete() {
 
 }
-func (t *NotFound) Handle(ctx *vapper.Context) {
+func (t *NotFound) Handle(ctx *jsvapper.Context) {
 	vecty.RenderBody(t)
 }
 

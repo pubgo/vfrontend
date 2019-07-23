@@ -7,14 +7,14 @@ import (
 	"github.com/gopherjs/vecty"
 	"github.com/gopherjs/vecty/elem"
 	"github.com/gopherjs/vecty/prop"
-	"github.com/pubgo/vapper/vapper"
+	"github.com/pubgo/vapper/jsvapper"
 	"github.com/pubgo/vfrontend/actions"
 	"github.com/pubgo/vfrontend/compontents"
 	"github.com/pubgo/vfrontend/stores"
 )
 
 type Page struct {
-	vapper.BaseView
+	jsvapper.BaseView
 
 	split *splitter.Split
 
@@ -26,11 +26,11 @@ func NewPage() *Page {
 	return v
 }
 
-func (t *Page) Handle(ctx *vapper.Context) {
+func (t *Page) Handle(ctx *jsvapper.Context) {
 	vecty.RenderBody(t)
 }
 
-func (t *Page) Init(app *vapper.Vapper, editor *stores.EditorStore) {
+func (t *Page) Init(app *jsvapper.Vapper, editor *stores.EditorStore) {
 	t.App = app
 	t.editor = editor
 }
