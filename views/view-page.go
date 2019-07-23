@@ -14,11 +14,12 @@ import (
 )
 
 type Page struct {
-	jsvapper.BaseView
-
+	vecty.Core
+	app   *jsvapper.Vapper
 	split *splitter.Split
 
-	editor *stores.EditorStore
+	editor  *stores.EditorStore
+	_review int
 }
 
 func NewPage() *Page {
@@ -26,23 +27,36 @@ func NewPage() *Page {
 	return v
 }
 
-func (t *Page) Handle(ctx *jsvapper.Context) {
-	vecty.RenderBody(t)
-}
+func (t *Page) Mount() {
+	t.app.Watch(t, func(done chan struct{}) {
+		defer close(done)
+		vecty.Rerender(t)
+	})
 
-func (t *Page) Init(app *jsvapper.Vapper, editor *stores.EditorStore) {
-	t.App = app
-	t.editor = editor
-}
-
-// ReadyStateComplete call when ReadyState is Complete
-func (t *Page) ReadyStateComplete() {
 	fmt.Println("ReadyStateComplete")
 	t.split = splitter.New("split")
 	t.split.Init(
 		js.S{"#left", "#right"},
 		js.M{"sizes": []float64{50, 50}},
 	)
+}
+
+func (t *Page) Unmount() {
+	t.app.Delete(t)
+}
+
+func (t *Page) Handle(ctx *jsvapper.Context) {
+	vecty.RenderBody(t)
+}
+
+func (t *Page) Init(app *jsvapper.Vapper, editor *stores.EditorStore) {
+	t.app = app
+	t.editor = editor
+}
+
+// ReadyStateComplete call when ReadyState is Complete
+func (t *Page) ReadyStateComplete() {
+
 }
 
 func (t *Page) Render() vecty.ComponentOrHTML {
@@ -64,7 +78,7 @@ func (t *Page) renderLeft() *vecty.HTML {
 			vecty.Class("split"),
 		),
 		compontents.NewEditor("html-editor", "html", t.editor.Html(), true, func(value string) {
-			t.App.Dispatch(&actions.UserChangedTextAction{
+			t.app.Dispatch(&actions.UserChangedTextAction{
 				Text: value,
 			})
 		}),

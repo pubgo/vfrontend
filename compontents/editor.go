@@ -21,7 +21,7 @@ type Editor struct {
 	readonly bool
 }
 
-func NewEditor( id, lang, text string, readonly bool, change func(string)) *Editor {
+func NewEditor(id, lang, text string, readonly bool, change func(string)) *Editor {
 	v := &Editor{
 		lang:     lang,
 		id:       id,
@@ -47,6 +47,7 @@ func (v *Editor) Mount() {
 		v.editor.OnChange(func(ev *js.Object) {
 			changes++
 			before := changes
+
 			go func() {
 				<-time.After(time.Millisecond * 250)
 				if before == changes {
