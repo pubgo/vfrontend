@@ -1,4 +1,4 @@
-package compontents
+package components
 
 import (
 	"time"

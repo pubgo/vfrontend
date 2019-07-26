@@ -9,7 +9,7 @@ import (
 	"github.com/gopherjs/vecty/prop"
 	"github.com/pubgo/vapper/jsvapper"
 	"github.com/pubgo/vfrontend/actions"
-	"github.com/pubgo/vfrontend/compontents"
+	"github.com/pubgo/vfrontend/components"
 	"github.com/pubgo/vfrontend/stores"
 )
 
@@ -19,7 +19,6 @@ type Page struct {
 	split *splitter.Split
 
 	editor  *stores.EditorStore
-	_review int
 }
 
 func NewPage() *Page {
@@ -77,7 +76,7 @@ func (t *Page) renderLeft() *vecty.HTML {
 			prop.ID("left"),
 			vecty.Class("split"),
 		),
-		compontents.NewEditor("html-editor", "html", t.editor.Html(), true, func(value string) {
+		components.NewEditor("html-editor", "html", t.editor.Html(), true, func(value string) {
 			t.app.Dispatch(&actions.UserChangedTextAction{
 				Text: value,
 			})
@@ -91,6 +90,6 @@ func (t *Page) renderRight() *vecty.HTML {
 			prop.ID("right"),
 			vecty.Class("split"),
 		),
-		compontents.NewEditor("code-editor", "golang", t.editor.Code(), false, nil),
+		components.NewEditor("code-editor", "golang", t.editor.Code(), false, nil),
 	)
 }
