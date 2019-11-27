@@ -18,6 +18,7 @@ type NotFound struct {
 func (t *NotFound) ReadyStateComplete() {
 
 }
+
 func (t *NotFound) Handle(ctx *jsvapper.Context) {
 	vecty.RenderBody(t)
 }

@@ -8,17 +8,17 @@ import (
 	"github.com/gopherjs/vecty/elem"
 	"github.com/gopherjs/vecty/prop"
 	"github.com/pubgo/vapper/jsvapper"
-	"github.com/pubgo/vfrontend/actions"
 	"github.com/pubgo/vfrontend/components"
 	"github.com/pubgo/vfrontend/stores"
 )
 
 type Page struct {
 	vecty.Core
+
 	app   *jsvapper.Vapper
 	split *splitter.Split
 
-	editor  *stores.EditorStore
+	editor *stores.EditorStore
 }
 
 func NewPage() *Page {
@@ -55,7 +55,6 @@ func (t *Page) Init(app *jsvapper.Vapper, editor *stores.EditorStore) {
 
 // ReadyStateComplete call when ReadyState is Complete
 func (t *Page) ReadyStateComplete() {
-
 }
 
 func (t *Page) Render() vecty.ComponentOrHTML {
@@ -76,11 +75,7 @@ func (t *Page) renderLeft() *vecty.HTML {
 			prop.ID("left"),
 			vecty.Class("split"),
 		),
-		components.NewEditor("html-editor", "html", t.editor.Html(), true, func(value string) {
-			t.app.Dispatch(&actions.UserChangedTextAction{
-				Text: value,
-			})
-		}),
+		components.NewEditor("html-editor", "html", t.editor.Html(), true),
 	)
 }
 
@@ -90,6 +85,6 @@ func (t *Page) renderRight() *vecty.HTML {
 			prop.ID("right"),
 			vecty.Class("split"),
 		),
-		components.NewEditor("code-editor", "golang", t.editor.Code(), false, nil),
+		components.NewEditor("code-editor", "golang", t.editor.Code(), false),
 	)
 }
